@@ -35,3 +35,12 @@ resource "heroku_addon" "default" {
 	app  = heroku_app.default.name
 	plan = "cloudkarafka:ducky"
 }
+
+// Output for clients
+module "broker_urls" {
+	source = "./modules/secrets"
+	file_name = "broker-urls.sops.json"
+}
+output "BROKER_URLS" {
+	value = module.broker_urls.json.BROKER_URLS
+}
