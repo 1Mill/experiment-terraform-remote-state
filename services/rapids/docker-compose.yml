@@ -16,8 +16,6 @@ services:
       KAFKA_ZOOKEEPER_CONNECT: zookeeper:2181
     networks:
       - services-network
-    ports:
-      - 9092:9092
 
   zookeeper:
     image: confluentinc/cp-zookeeper:5.4.2
