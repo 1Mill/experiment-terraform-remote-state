@@ -1,7 +1,7 @@
 version: '3.8'
 
 services:
-  terrafrom:
+  terraform:
     image: 1mill/terraform-sops:alpine-2020-07-05T19-24-29
     environment:
       AWS_ACCESS_KEY_ID: ${AWS_ACCESS_KEY_ID}
