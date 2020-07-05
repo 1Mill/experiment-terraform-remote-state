@@ -31,4 +31,7 @@ resource "heroku_app" "default" {
 	name = "rapids"
 	region = "us"
 }
-
+resource "heroku_addon" "default" {
+	app  = heroku_app.default.name
+	plan = "cloudkarafka:ducky"
+}
