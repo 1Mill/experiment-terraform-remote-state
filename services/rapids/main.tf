@@ -21,7 +21,7 @@ module "heroku" {
 	file_name = "heroku.sops.json"
 }
 provider "heroku" {
-	api_key = heroku.json.APIKEY
-	email = heroku.json.EMAIL
+	api_key = module.heroku.json.APIKEY
+	email = module.heroku.json.EMAIL
 	version = "~> 2.5"
 }
