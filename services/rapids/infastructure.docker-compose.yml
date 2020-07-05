@@ -1,0 +1,7 @@
+version: '3.8'
+
+services:
+  terrafrom:
+    image: 1mill/terraform-sops:alpine-2020-07-05T19-24-29
+    volumes:
+      - ./:/app
