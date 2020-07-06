@@ -1,5 +1,6 @@
 const ioMiddlewareWildcard = require('socketio-wildcard')();
 const { KAFKA_EVENTTYPE, subscribe } = require("@1mill/cloudevents");
+const { getSecret } = require('./utility/getSecret');
 
 const server = require('http').createServer();
 const io = require('socket.io')(server);
@@ -16,7 +17,6 @@ io.use(ioMiddlewareWildcard);
 // })
 
 const main = async() => {
-	const { getSecret } = require('./utility/getSecret');
 	const data = await getSecret({ path: './secrets/brokers.sops.json' });
 	console.log(data);
 };
