@@ -1,1 +1,9 @@
 version: '3.8'
+
+services:
+  dev:
+    build: .
+    environment:
+      NODE_ENV: development
+    volumes:
+      - ./:/app
