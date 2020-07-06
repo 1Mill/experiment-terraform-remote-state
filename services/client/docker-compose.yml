@@ -1,1 +1,9 @@
 version: '3.8'
+
+services:
+  sockets:
+    build: ./sockets
+    environment:
+      NODE_ENV: development
+    volumes:
+      - ./sockets:/app
