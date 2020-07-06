@@ -1,6 +1,6 @@
 const ioMiddlewareWildcard = require('socketio-wildcard')();
 const { KAFKA_EVENTTYPE, subscribe } = require("@1mill/cloudevents");
-const { getSecret } = require('./utility/getSecret');
+const { getSecret } = require('./utilities/getSecret');
 
 const server = require('http').createServer();
 const io = require('socket.io')(server);
