@@ -7,6 +7,7 @@ services:
       AWS_ACCESS_KEY_ID: ${AWS_ACCESS_KEY_ID}
       AWS_SECRET_ACCESS_KEY: ${AWS_SECRET_ACCESS_KEY}
       NODE_ENV: development
+      RAPIDS_URLS: rapids:9092
     networks:
       - services-network
     volumes:
