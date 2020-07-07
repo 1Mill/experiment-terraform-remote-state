@@ -2,6 +2,8 @@ const ioMiddlewareWildcard = require('socketio-wildcard')();
 const {
 	KAFKA_EVENTTYPE,
 	createBroker,
+	publish,
+	create,
 } = require('@1mill/cloudevents');
 
 const server = require('http').createServer();
@@ -17,4 +19,14 @@ const broker = createBroker({
 	urls: RAPIDS_URLS,
 });
 
-console.log(broker);
+const main = async() => {
+	const cloudevent = create({
+		id: ID,
+		type: "hello-world.2020-07-06",
+	});
+	await publish({
+		broker,
+		cloudevent,
+	});
+};
+main();
