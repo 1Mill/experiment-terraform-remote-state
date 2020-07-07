@@ -1,12 +1,22 @@
 version: '3.8'
 
 services:
+  ui:
+    build: ./ui
+    environment:
+      NODE_ENV: development
+      SOCKETS_URL: sockets:8080
+    networks:
+      - services-network
+    volumes:
+      - ./ui:/app
   sockets:
     build: ./sockets
     environment:
       AWS_ACCESS_KEY_ID: ${AWS_ACCESS_KEY_ID}
       AWS_SECRET_ACCESS_KEY: ${AWS_SECRET_ACCESS_KEY}
       NODE_ENV: development
+      PORT: 8080
       RAPIDS_URLS: rapids:9092
     networks:
       - services-network
