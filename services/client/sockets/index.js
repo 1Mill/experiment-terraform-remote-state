@@ -40,7 +40,7 @@ const main = async() => {
 				return true;
 			}
 		},
-		types: ['hello-world.2020-07-06']
+		types: ['hello-world.2020-07-06'],
 	});
 };
 main();
