@@ -20,7 +20,20 @@ const broker = createBroker({
 	urls: RAPIDS_URLS,
 });
 
-const main = async() => {
+subscribe({
+	broker,
+	handler: async({ isEnriched }) => {
+		if (isEnriched) {
+			console.log('Enriched message was got');
+		} else {
+			console.log('Sending enriched message');
+			return true;
+		}
+	},
+	types: ['hello-world.2020-07-06'],
+});
+
+setInterval(async() => {
 	const cloudevent = create({
 		id: ID,
 		type: 'hello-world.2020-07-06',
@@ -29,18 +42,4 @@ const main = async() => {
 		broker,
 		cloudevent,
 	});
-
-	await subscribe({
-		broker,
-		handler: async({ isEnriched }) => {
-			if (isEnriched) {
-				console.log('Enriched message was got');
-			} else {
-				console.log('Sending enriched message');
-				return true;
-			}
-		},
-		types: ['hello-world.2020-07-06'],
-	});
-};
-main();
+}, 3000);
