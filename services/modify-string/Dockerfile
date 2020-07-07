@@ -9,10 +9,12 @@ RUN npm install
 
 COPY . .
 
+ARG PORT=8080
 ENV \
 	HOST=0.0.0.0 \
 	NODE_ENV=production \
-	PORT=8080
+	PORT=${PORT} \
+	RAPIDS_URLS=${RAPIDS_URLS}
 
 EXPOSE ${PORT}
 
