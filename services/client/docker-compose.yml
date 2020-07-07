@@ -6,7 +6,7 @@ services:
     environment:
       NODE_ENV: development
       PORT: 8080
-      SOCKETS_URL: sockets:8080
+      VUE_APP_SOCKETS_URL: sockets:8080
     networks:
       - services-network
     ports:
