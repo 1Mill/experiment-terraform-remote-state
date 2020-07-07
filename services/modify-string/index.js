@@ -1,6 +1,5 @@
 const {
 	KAFKA_EVENTTYPE,
-	create,
 	createBroker,
 	publish,
 	subscribe,
@@ -20,8 +19,8 @@ subscribe({
 	handler: async({ data, isEnriched }) => {
 		try {
 			if (isEnriched) { return; }
-			console.log(data);
-			return data.split('-');
+			const string = data;
+			return string.match(/[0-9 , \.]+/g).join('');
 		} catch(err) {
 			console.error(err);
 			publish({

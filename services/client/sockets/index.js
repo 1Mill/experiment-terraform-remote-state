@@ -22,10 +22,11 @@ const broker = createBroker({
 
 subscribe({
 	broker,
-	handler: async({ enrichment, isEnriched }) => {
+	handler: async({ data, enrichment, isEnriched }) => {
 		try {
 			if (!isEnriched) { return; }
-			console.log(enrichment);
+			console.log('data:', data)
+			console.log('enrichment: ', enrichment);
 		} catch (err) {
 			console.err(err);
 			publish({
@@ -39,7 +40,7 @@ subscribe({
 
 setInterval(async() => {
 	const cloudevent = create({
-		data: 'this-is-my-random-string',
+		data: Math.random().toString(36).substring(2, 15) + Math.random().toString(36).substring(2, 15),
 		id: ID,
 		type: 'modify-string.2020-07-07',
 	});
