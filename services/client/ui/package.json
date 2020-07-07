@@ -1,12 +1,26 @@
 {
   "name": "app",
   "version": "1.0.0",
-  "main": "index.js",
+  "private": true,
+  "description": "",
+  "author": "",
   "scripts": {
-    "start": "node index.js",
+    "build": "vue-cli-service build",
+    "serve": "vue-cli-service serve",
+    "start": "npm run serve",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
-  "author": "",
+  "main": "index.js",
+  "dependencies": {
+    "core-js": "^3.6.5",
+    "vue": "^2.6.11"
+  },
+  "devDependencies": {
+    "@vue/cli-plugin-babel": "~4.4.0",
+    "@vue/cli-service": "~4.4.0",
+    "vue-template-compiler": "^2.6.11"
+  },
+  "_id": "app@1.0.0",
   "license": "ISC",
-  "description": ""
+  "readme": "ERROR: No README data found!"
 }
