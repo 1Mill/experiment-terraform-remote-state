@@ -1,9 +1,10 @@
 const ioMiddlewareWildcard = require('socketio-wildcard')();
 const {
 	KAFKA_EVENTTYPE,
+	create,
 	createBroker,
 	publish,
-	create,
+	subscribe,
 } = require('@1mill/cloudevents');
 
 const server = require('http').createServer();
@@ -22,11 +23,24 @@ const broker = createBroker({
 const main = async() => {
 	const cloudevent = create({
 		id: ID,
-		type: "hello-world.2020-07-06",
+		type: 'hello-world.2020-07-06',
 	});
 	await publish({
 		broker,
 		cloudevent,
+	});
+
+	await subscribe({
+		broker,
+		handler: async({ isEnriched }) => {
+			if (isEnriched) {
+				console.log('Enriched message was got');
+			} else {
+				console.log('Sending enriched message');
+				return true;
+			}
+		},
+		types: ['hello-world.2020-07-06']
 	});
 };
 main();
