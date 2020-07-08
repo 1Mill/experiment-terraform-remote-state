@@ -52,8 +52,6 @@ io.on('connect', socket => {
 					broker,
 					cloudevent,
 				});
-
-				console.log(cloudevent);
 			});
 		} catch (err) {
 			console.error(err);
