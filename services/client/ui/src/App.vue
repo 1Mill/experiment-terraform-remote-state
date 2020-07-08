@@ -4,6 +4,7 @@ import { publish, subscribe } from './utilities/cloudevents';
 export default {
 	data() {
 		return {
+			input: this.generateRandomString(),
 			items: [],
 		};
 	},
@@ -16,7 +17,17 @@ export default {
 		});
 	},
 	methods: {
-		publish,
+		generateRandomString() {
+			return Math.random().toString(36).substring(2, 15)
+				+ Math.random().toString(36).substring(2, 15);
+		},
+		submit() {
+			publish({
+				payloads: [this.input],
+				type: "modify-string.2020-07-07",
+			});
+			this.input = this.generateRandomString();
+		},
 	},
 };
 </script>
@@ -24,12 +35,18 @@ export default {
 <template>
 	<main>
 		<h1>Hello world!</h1>
-		<button @click='publish({
-			payloads: ["54323"],
-			type: "modify-string.2020-07-07",
-		})'>
-			Send string
-		</button>
+		<form @submit.prevent='submit'>
+			<label for='input'>
+				Payload
+			</label>
+			<input
+			id='input'
+			name='input'
+			type='text'
+			v-model='input'
+			/>
+			<button type='submit'>Submit</button>
+		</form>
 
 		<h2>List items</h2>
 		<ul>
