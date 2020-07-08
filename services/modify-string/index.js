@@ -19,8 +19,10 @@ subscribe({
 	handler: async({ data, isEnriched }) => {
 		try {
 			if (isEnriched) { return; }
+
 			const string = data;
-			return string.match(/[0-9 , \.]+/g).join('');
+			const numbers = string.match(/[0-9 , \.]+/g) || [];
+			return numbers.join('');
 		} catch(err) {
 			console.error(err);
 			publish({
