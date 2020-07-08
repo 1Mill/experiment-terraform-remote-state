@@ -22,11 +22,10 @@ const broker = createBroker({
 
 subscribe({
 	broker,
-	handler: async({ data, enrichment, isEnriched }) => {
+	handler: async({ enrichment, id, isEnriched, type }) => {
 		try {
 			if (!isEnriched) { return; }
-			console.log('data:', data)
-			console.log('enrichment: ', enrichment);
+			io.to(id).emit(type, enrichment);
 		} catch (err) {
 			console.err(err);
 			publish({
