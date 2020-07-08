@@ -38,14 +38,30 @@ subscribe({
 	types: ['modify-string.2020-07-07'],
 });
 
-setInterval(async() => {
-	const cloudevent = create({
-		data: Math.random().toString(36).substring(2, 15) + Math.random().toString(36).substring(2, 15),
-		id: ID,
-		type: 'modify-string.2020-07-07',
+io.on('connect', socket => {
+	socket.on('*', packet => {
+		try {
+			const [{ type, payloads = [{}] }] = packet.data;
+			payloads.forEach(payload => {
+				const cloudevent = create({
+					data: payload,
+					id: socket.id,
+					source: packet.nsp,
+					type,
+				});
+				publish({
+					broker,
+					cloudevent,
+				});
+
+				console.log(cloudevent);
+			});
+		} catch (err) {
+			console.error(err);
+		}
 	});
-	await publish({
-		broker,
-		cloudevent,
-	});
-}, 5000);
+});
+
+server.listen(process.env.PORT, () => {
+	console.log(`Listening on ${process.env.HOST}:${process.env.PORT}`);
+});
