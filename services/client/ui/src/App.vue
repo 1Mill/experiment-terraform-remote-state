@@ -48,7 +48,7 @@ export default {
 			<button type='submit'>Submit</button>
 		</form>
 
-		<h2>List items</h2>
+		<h2>Numbers from input</h2>
 		<ul>
 			<li
 			v-for='(item, index) in items'
