@@ -6,7 +6,7 @@ services:
     environment:
       NODE_ENV: development
       PORT: 8080
-      VUE_APP_SOCKETS_URL: sockets:8080
+      VUE_APP_SOCKETS_URL: localhost:8081
     networks:
       - services-network
     ports:
@@ -20,10 +20,12 @@ services:
       AWS_ACCESS_KEY_ID: ${AWS_ACCESS_KEY_ID}
       AWS_SECRET_ACCESS_KEY: ${AWS_SECRET_ACCESS_KEY}
       NODE_ENV: development
-      PORT: 8080
+      PORT: 8081
       RAPIDS_URLS: rapids:9092
     networks:
       - services-network
+    ports:
+      - 8081:8081
     volumes:
       - ./sockets:/app
 
