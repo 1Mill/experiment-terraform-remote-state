@@ -8,7 +8,7 @@ terraform {
 		// secret_key = ENVIRONMENT AWS_SECRET_ACCESS_KEY
 
 		bucket = "experiment-2-terraform-state"
-		dynamodb_table = "experiment-1-terraform-state-locks"
+		dynamodb_table = "experiment-2-terraform-state-locks"
 		encrypt = true
 		key = "terraform.tfstate"
 	}
