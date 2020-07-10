@@ -25,8 +25,25 @@ provider "heroku" {
 	version = "~> 2.5"
 }
 
-// Create application
+// Create, build, and release application
 resource "heroku_app" "default" {
 	name = "modify-string"
 	region = "us"
 }
+resource "heroku_app_config_association" "default" {
+	app_id = heroku_app.default.id
+	vars = {
+		PROCFILE = "/services/modify-string/Procfile"
+	}
+}
+// resource "heroku_build" "default" {
+// 	app = heroku_app.default.name
+// 	buildpacks = [
+// 		"https://github.com/heroku/heroku-buildpack-multi-procfile",
+// 		"https://github.com/heroku/heroku-buildpack-nodejs",
+// 	]
+// 	source = {
+// 		url = "https://github.com/${var.APPLICATION_REPOSITORY}/archive/${var.APPLICATION_VERSION}.tar.gz"
+// 		version = var.APPLICATION_VERSION
+// 	}
+// }
