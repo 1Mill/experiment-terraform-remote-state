@@ -16,7 +16,7 @@ terraform {
 
 // Create, build, and release application
 module "client_ui" {
-	source = "./modules/platforms/node"
+	source = "./modules/heroku-node"
 
 	application_name = "services-client-ui"
 	application_project_path = "services/client/ui"

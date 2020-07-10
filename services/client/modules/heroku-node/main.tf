@@ -11,9 +11,9 @@ variable "application_version" {
 
 // Required providers
 module "heroku" {
-	source = "../../secrets"
+	source = "../secrets"
 
-	file_path = "/modules/platforms/node/heroku.sops.json"
+	file_path = "/modules/heroku-node/heroku.sops.json"
 }
 provider "heroku" {
 	api_key = module.heroku.json.APIKEY
