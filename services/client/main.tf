@@ -33,13 +33,14 @@ resource "heroku_app" "default" {
 resource "heroku_app_config_association" "default" {
 	app_id = heroku_app.default.id
 	vars = {
-		PROCFILE = "services/client/ui/procfile"
+		PROJECT_PATH = "services/client/ui"
 	}
 }
 resource "heroku_build" "default" {
 	app = heroku_app.default.name
 	buildpacks = [
-		"https://github.com/heroku/heroku-buildpack-multi-procfile",
+		"https://github.com/timanovsky/subdir-heroku-buildpack",
+		"https://github.com/heroku/heroku-buildpack-nodejs",
 	]
 	source = {
 		url = "https://github.com/1Mill/experiment-terraform-remote-state/archive/v0.0.1.tar.gz"
