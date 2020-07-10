@@ -22,3 +22,14 @@ module "client_ui" {
 	application_project_path = "services/client/ui"
 	application_version = "v0.0.6"
 }
+module "sockets" {
+	source = "./modules/heroku-node"
+
+	application_name = "services-client-sockets"
+	application_project_path = "services/client/sockets"
+	application_version = "v0.0.6"
+}
+
+output "sockets_url" {
+	value = module.sockets.url
+}
