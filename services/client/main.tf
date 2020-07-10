@@ -43,8 +43,8 @@ resource "heroku_build" "default" {
 		"https://github.com/heroku/heroku-buildpack-nodejs",
 	]
 	source = {
-		url = "https://github.com/1Mill/experiment-terraform-remote-state/archive/v0.0.5.tar.gz"
-		version = "v0.0.5"
+		url = "https://github.com/1Mill/experiment-terraform-remote-state/archive/v0.0.6.tar.gz"
+		version = "v0.0.6"
 	}
 }
 resource "heroku_formation" "default" {
