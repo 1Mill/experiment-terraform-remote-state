@@ -12,19 +12,18 @@
   },
   "main": "index.js",
   "dependencies": {
-    "core-js": "^3.6.5",
-    "socket.io-client": "^2.3.0",
-    "vue": "^2.6.11"
-  },
-  "devDependencies": {
     "@vue/cli-plugin-babel": "~4.4.0",
     "@vue/cli-service": "~4.4.0",
+    "core-js": "^3.6.5",
+    "socket.io-client": "^2.3.0",
+    "vue": "^2.6.11",
     "vue-template-compiler": "^2.6.11"
   },
   "_id": "app@1.0.0",
   "license": "ISC",
   "readme": "ERROR: No README data found!",
   "engines": {
-    "node": "^14"
+    "node": "^14.4.0",
+    "npm": "^6.14.5"
   }
 }
