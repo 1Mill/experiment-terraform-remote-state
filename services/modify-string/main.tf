@@ -33,17 +33,24 @@ resource "heroku_app" "default" {
 resource "heroku_app_config_association" "default" {
 	app_id = heroku_app.default.id
 	vars = {
-		PROCFILE = "/services/modify-string/Procfile"
+		PROCFILE = "services/modify-string/Procfile"
 	}
 }
-// resource "heroku_build" "default" {
-// 	app = heroku_app.default.name
-// 	buildpacks = [
-// 		"https://github.com/heroku/heroku-buildpack-multi-procfile",
-// 		"https://github.com/heroku/heroku-buildpack-nodejs",
-// 	]
-// 	source = {
-// 		url = "https://github.com/${var.APPLICATION_REPOSITORY}/archive/${var.APPLICATION_VERSION}.tar.gz"
-// 		version = var.APPLICATION_VERSION
-// 	}
-// }
+resource "heroku_build" "default" {
+	app = heroku_app.default.name
+	buildpacks = [
+		"https://github.com/heroku/heroku-buildpack-multi-procfile",
+		// "https://github.com/heroku/heroku-buildpack-nodejs",
+	]
+	source = {
+		url = "https://github.com/1Mill/experiment-terraform-remote-state/archive/v0.0.1.tar.gz"
+		version = "v0.0.1"
+	}
+}
+resource "heroku_formation" "default" {
+	app = heroku_app.default.id
+	depends_on = [ heroku_build.default ]
+	quantity = 1
+	size = "free"
+	type = "web"
+}
