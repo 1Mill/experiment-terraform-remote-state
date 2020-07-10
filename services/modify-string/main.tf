@@ -24,3 +24,9 @@ provider "heroku" {
 	email = module.heroku.json.EMAIL
 	version = "~> 2.5"
 }
+
+// Create application
+resource "heroku_app" "default" {
+	name = "modify-string"
+	region = "us"
+}
