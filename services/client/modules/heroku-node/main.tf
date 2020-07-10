@@ -50,3 +50,7 @@ resource "heroku_formation" "default" {
 	size = "free"
 	type = "web"
 }
+
+output "url" {
+	value = heroku_app.default.web_url
+}
