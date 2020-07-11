@@ -6,7 +6,7 @@ const {
 } = require('@1mill/cloudevents');
 
 const ID = 'services.modify-string';
-const RAPIDS_URLS = process.env.RAPIDS_URLS.split(',');
+const RAPIDS_URLS = (process.env.RAPIDS_URLS || '').split(',');
 
 const broker = createBroker({
 	eventType: KAFKA_EVENTTYPE,

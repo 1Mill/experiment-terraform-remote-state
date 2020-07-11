@@ -12,7 +12,7 @@ const io = require('socket.io')(server);
 io.use(ioMiddlewareWildcard);
 
 const ID = 'services.client.sockets';
-const RAPIDS_URLS = process.env.RAPIDS_URLS.split(',');
+const RAPIDS_URLS = (process.env.RAPIDS_URLS || '').split(',');
 
 const broker = createBroker({
 	eventType: KAFKA_EVENTTYPE,
