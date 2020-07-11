@@ -13,7 +13,7 @@ export default {
 			handler: ({ payload }) => {
 				this.items.unshift(payload);
 			},
-			type: 'modify-string.2020-07-07',
+			type: 'ddnlanm4-modify-string.2020-07-07',
 		});
 	},
 	methods: {
@@ -24,7 +24,7 @@ export default {
 		submit() {
 			publish({
 				payloads: [this.input],
-				type: "modify-string.2020-07-07",
+				type: 'ddnlanm4-modify-string.2020-07-07',
 			});
 			this.input = this.generateRandomString();
 		},
