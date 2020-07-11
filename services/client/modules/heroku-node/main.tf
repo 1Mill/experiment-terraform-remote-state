@@ -1,4 +1,13 @@
 // Module inputs
+variable "application_environment" {
+	default = []
+	type = list(
+		object({
+			key = string
+			value = string
+		})
+	)
+}
 variable "application_name" {
 	type = string
 }
@@ -28,9 +37,10 @@ resource "heroku_app" "default" {
 }
 resource "heroku_app_config_association" "default" {
 	app_id = heroku_app.default.id
-	vars = {
-		PROJECT_PATH = var.application_project_path
-	}
+	vars = merge(
+		{ PROJECT_PATH = var.application_project_path },
+		{ for env in var.application_environment : (env.key) => (env.value) },
+	)
 }
 resource "heroku_build" "default" {
 	app = heroku_app.default.name

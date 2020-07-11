@@ -40,6 +40,11 @@ module "ui" {
 module "sockets" {
 	source = "./modules/heroku-node"
 
+	application_environment = [
+		{ key: "ANOTHER_TESTING", value: "1234" },
+		{ key: "PROJECT_PATH", value: "services/client/sockets" },
+		{ key: "TESTING", value: "testing" },
+	]
 	application_name = "services-client-sockets"
 	application_project_path = "services/client/sockets"
 	application_version = "v0.0.8"
