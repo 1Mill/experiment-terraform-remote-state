@@ -33,6 +33,9 @@ data "terraform_remote_state" "rapids" {
 module "ui" {
 	source = "./modules/heroku-node"
 
+	application_environment = [
+		{ key: "VUE_APP_SOCKETS_URL", value: module.sockets.url },
+	]
 	application_name = "services-client-ui"
 	application_project_path = "services/client/ui"
 	application_version = "v0.0.8"
@@ -41,15 +44,10 @@ module "sockets" {
 	source = "./modules/heroku-node"
 
 	application_environment = [
-		{ key: "ANOTHER_TESTING", value: "1234" },
 		{ key: "PROJECT_PATH", value: "services/client/sockets" },
-		{ key: "TESTING", value: "testing" },
+		{ key: "RAPIDS_URLS", value: data.terraform_remote_state.rapids.outputs.urls_string },
 	]
 	application_name = "services-client-sockets"
 	application_project_path = "services/client/sockets"
 	application_version = "v0.0.8"
-}
-
-output "rapids_url" {
-	value = data.terraform_remote_state.rapids.outputs.urls_string
 }
