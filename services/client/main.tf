@@ -34,6 +34,7 @@ module "ui" {
 	source = "./modules/heroku-node"
 
 	application_environment = [
+		{ key: "NODE_ENV", value: "production" },
 		{ key: "VUE_APP_SOCKETS_URL", value: module.sockets.url },
 	]
 	application_name = "services-client-ui"
@@ -44,7 +45,7 @@ module "sockets" {
 	source = "./modules/heroku-node"
 
 	application_environment = [
-		{ key: "PROJECT_PATH", value: "services/client/sockets" },
+		{ key: "NODE_ENV", value: "production" },
 		{ key: "RAPIDS_URLS", value: data.terraform_remote_state.rapids.outputs.urls_string },
 	]
 	application_name = "services-client-sockets"
