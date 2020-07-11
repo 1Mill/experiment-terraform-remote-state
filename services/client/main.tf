@@ -37,7 +37,6 @@ module "ui" {
 		{ key: "NODE_ENV", value: "production" },
 		{ key: "VUE_APP_SOCKETS_URL", value: module.sockets.url },
 	]
-	application_dyno_type = "web"
 	application_name = "services-client-ui"
 	application_project_path = "services/client/ui"
 	application_version = "v0.0.8"
