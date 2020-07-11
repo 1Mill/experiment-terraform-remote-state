@@ -17,6 +17,11 @@ variable "application_project_path" {
 variable "application_version" {
 	type = string
 }
+// https://devcenter.heroku.com/articles/dynos#dyno-configurations
+variable "application_dyno_type" {
+	default = "worker"
+	type = string
+}
 
 // Required providers
 module "heroku" {
@@ -58,7 +63,7 @@ resource "heroku_formation" "default" {
 	depends_on = [ heroku_build.default ]
 	quantity = 1
 	size = "free"
-	type = "web"
+	type = var.application_dyno_type
 }
 
 output "url" {
