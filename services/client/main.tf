@@ -15,19 +15,19 @@ terraform {
 }
 
 // Create, build, and release application
-module "client_ui" {
+module "ui" {
 	source = "./modules/heroku-node"
 
 	application_name = "services-client-ui"
 	application_project_path = "services/client/ui"
-	application_version = "v0.0.7"
+	application_version = "v0.0.8"
 }
 module "sockets" {
 	source = "./modules/heroku-node"
 
 	application_name = "services-client-sockets"
 	application_project_path = "services/client/sockets"
-	application_version = "v0.0.7"
+	application_version = "v0.0.8"
 }
 
 output "sockets_url" {
