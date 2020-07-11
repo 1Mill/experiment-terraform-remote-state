@@ -33,7 +33,7 @@ resource "heroku_app" "default" {
 resource "heroku_app_config_association" "default" {
 	app_id = heroku_app.default.id
 	vars = {
-		PROCFILE = "services/modify-string/procfile"
+		PROCFILE = "services/modify-string/Procfile"
 	}
 }
 resource "heroku_build" "default" {
