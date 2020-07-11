@@ -1,5 +1,6 @@
 const {
 	KAFKA_EVENTTYPE,
+	createAuthentication,
 	createBroker,
 	publish,
 	subscribe,
@@ -8,7 +9,16 @@ const {
 const ID = 'services.modify-string';
 const RAPIDS_URLS = (process.env.RAPIDS_URLS || '').split(',');
 
+const authentication = createAuthentication({
+	type: 'sasl',
+	config: {
+		mechanism: 'scram-sha-256',
+		password: process.env.RAPIDS_PASSWORD,
+		username: process.env.RAPIDS_USERNAME,
+	},
+});
 const broker = createBroker({
+	authentication,
 	eventType: KAFKA_EVENTTYPE,
 	id: ID,
 	urls: RAPIDS_URLS,
@@ -31,5 +41,5 @@ subscribe({
 			});
 		}
 	},
-	types: ['modify-string.2020-07-07']
+	types: ['ddnlanm4-modify-string.2020-07-07']
 });
