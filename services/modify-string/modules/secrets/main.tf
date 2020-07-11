@@ -1,4 +1,4 @@
-variable "file_name" {
+variable "file_path" {
 	type = string
 }
 
@@ -7,7 +7,7 @@ provider "sops" {
 }
 
 data "sops_file" "default" {
-  	source_file = "${path.cwd}/${var.file_name}"
+  	source_file = "${path.cwd}/${var.file_path}"
 }
 
 output "json" {
