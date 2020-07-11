@@ -47,3 +47,18 @@ output "urls" {
 output "urls_string" {
 	value = join(",", module.urls.json.urls)
 }
+
+module "credentials" {
+	source = "./modules/secrets"
+	file_name = "credentials.sops.json"
+}
+output "password" {
+	description = "The password for SASL access to application"
+	sensitive = true
+	value = module.credentials.json.password
+}
+output "username" {
+	description = "The username for SASL access to application"
+	sensitive = true
+	value = module.credentials.json.username
+}
