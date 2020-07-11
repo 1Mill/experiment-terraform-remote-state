@@ -14,6 +14,20 @@ terraform {
 	}
 }
 
+data "terraform_remote_state" "rapids" {
+	backend = "s3"
+	config = {
+		// access_key = ENVIRONMENT AWS_ACCESS_KEY_ID
+		// region = ENVIRONMENT AWS_DEFAULT_REGION
+		// secret_key = ENVIRONMENT AWS_SECRET_ACCESS_KEY
+
+		bucket = "experiment-1-terraform-state"
+		dynamodb_table = "experiment-1-terraform-state-locks"
+		encrypt = true
+		key = "terraform.tfstate"
+	}
+}
+
 // Create, build, and release application
 module "ui" {
 	source = "./modules/heroku-node"
@@ -30,6 +44,6 @@ module "sockets" {
 	application_version = "v0.0.8"
 }
 
-output "sockets_url" {
-	value = module.sockets.url
+output "rapids_url" {
+	value = data.terraform_remote_state.rapids.outputs.urls_string
 }
