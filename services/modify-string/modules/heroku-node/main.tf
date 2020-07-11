@@ -58,7 +58,7 @@ resource "heroku_formation" "default" {
 	depends_on = [ heroku_build.default ]
 	quantity = 1
 	size = "free"
-	type = "web"
+	type = "worker"
 }
 
 output "url" {
