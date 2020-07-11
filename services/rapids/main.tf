@@ -37,10 +37,10 @@ resource "heroku_addon" "default" {
 }
 
 // Output for clients
-module "broker_urls" {
+module "urls" {
 	source = "./modules/secrets"
-	file_name = "broker-urls.sops.json"
+	file_name = "urls.sops.json"
 }
-output "BROKER_URLS" {
-	value = module.broker_urls.json.BROKER_URLS
+output "urls" {
+	value = join(",", module.urls.json.urls)
 }
