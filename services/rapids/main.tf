@@ -42,5 +42,8 @@ module "urls" {
 	file_name = "urls.sops.json"
 }
 output "urls" {
+	value = module.urls.json.urls
+}
+output "urls_string" {
 	value = join(",", module.urls.json.urls)
 }
