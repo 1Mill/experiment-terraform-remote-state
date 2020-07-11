@@ -14,6 +14,7 @@ terraform {
 	}
 }
 
+// Rapids remote state
 data "terraform_remote_state" "rapids" {
 	backend = "s3"
 	config = {
