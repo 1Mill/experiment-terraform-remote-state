@@ -41,5 +41,5 @@ module "application" {
 	]
 	application_name = "services-modify-string"
 	application_project_path = "services/modify-string"
-	application_version = "v0.0.9"
+	application_version = "v0.0.10"
 }
