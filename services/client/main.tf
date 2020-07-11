@@ -39,7 +39,7 @@ module "ui" {
 	]
 	application_name = "services-client-ui"
 	application_project_path = "services/client/ui"
-	application_version = "v0.0.11"
+	application_version = "v0.0.12"
 }
 module "sockets" {
 	source = "./modules/heroku-node"
@@ -52,5 +52,5 @@ module "sockets" {
 	]
 	application_name = "services-client-sockets"
 	application_project_path = "services/client/sockets"
-	application_version = "v0.0.10"
+	application_version = "v0.0.12"
 }
