@@ -19,9 +19,7 @@ services:
     environment:
       NODE_ENV: development
       PORT: 8081
-      RAPIDS_PASSWORD: my-rapids-password
       RAPIDS_URLS: rapids:9092
-      RAPIDS_USERNAME: my-rapids-username
     networks:
       - services-network
     ports:

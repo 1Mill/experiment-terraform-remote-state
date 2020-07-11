@@ -5,9 +5,7 @@ services:
     build: .
     environment:
       NODE_ENV: development
-      RAPIDS_PASSWORD: ${RAPIDS_PASSWORD}
-      RAPIDS_URLS: ${RAPIDS_URLS}
-      RAPIDS_USERNAME: ${RAPIDS_USERNAME}
+      RAPIDS_URLS: rapids:9092
     networks:
       - services-network
     volumes:

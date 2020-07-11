@@ -6,20 +6,22 @@ const {
 	createBroker,
 	publish,
 	subscribe,
-} = require("@1mill/cloudevents");
+} = require('@1mill/cloudevents');
 
 const server = require('http').createServer();
 const io = require('socket.io')(server);
 io.use(ioMiddlewareWildcard);
 
-const authentication = createAuthentication({
-	type: 'sasl',
-	config: {
-		mechanism: 'scram-sha-256',
-		password: process.env.RAPIDS_PASSWORD,
-		username: process.env.RAPIDS_USERNAME,
-	},
-});
+const authentication = process.env.RAPIDS_PASSWORD && process.env.RAPIDS_USERNAME
+	? createAuthentication({
+		type: 'sasl',
+		config: {
+			mechanism: 'scram-sha-256',
+			password: process.env.RAPIDS_PASSWORD,
+			username: process.env.RAPIDS_USERNAME,
+		},
+	})
+	: {};
 const broker = createBroker({
 	authentication,
 	eventType: KAFKA_EVENTTYPE,
