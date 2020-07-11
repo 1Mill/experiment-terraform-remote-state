@@ -6,9 +6,6 @@ const {
 	subscribe,
 } = require('@1mill/cloudevents');
 
-const ID = 'services.modify-string';
-const RAPIDS_URLS = (process.env.RAPIDS_URLS || '').split(',');
-
 const authentication = createAuthentication({
 	type: 'sasl',
 	config: {
@@ -20,8 +17,8 @@ const authentication = createAuthentication({
 const broker = createBroker({
 	authentication,
 	eventType: KAFKA_EVENTTYPE,
-	id: ID,
-	urls: RAPIDS_URLS,
+	id: 'services.modify-string',
+	urls: (process.env.RAPIDS_URLS || '').split(','),
 });
 
 subscribe({
