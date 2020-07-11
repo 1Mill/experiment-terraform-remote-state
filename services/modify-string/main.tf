@@ -35,7 +35,9 @@ module "application" {
 
 	application_environment = [
 		{ key: "NODE_ENV", value: "production" },
+		{ key: "RAPIDS_PASSWORD", value: data.terraform_remote_state.rapids.outputs.password },
 		{ key: "RAPIDS_URLS", value: data.terraform_remote_state.rapids.outputs.urls_string },
+		{ key: "RAPIDS_USERNAME", value: data.terraform_remote_state.rapids.outputs.username },
 	]
 	application_name = "services-modify-string"
 	application_project_path = "services/modify-string"
