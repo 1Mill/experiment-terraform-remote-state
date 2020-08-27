@@ -1,44 +1,27 @@
 const {
-	KAFKA_EVENTTYPE,
-	createAuthentication,
-	createBroker,
-	publish,
-	subscribe,
-} = require('@1mill/cloudevents');
+	v2: { createCloudevent, createEventStream },
+} = require('@1mill/cloudevents')
 
-const authentication = process.env.RAPIDS_PASSWORD && process.env.RAPIDS_USERNAME
-	? createAuthentication({
-			type: "sasl",
-			config: {
-				mechanism: "scram-sha-256",
-				password: process.env.RAPIDS_PASSWORD,
-				username: process.env.RAPIDS_USERNAME,
-			},
-		})
-	: {};
-const broker = createBroker({
-	authentication,
-	eventType: KAFKA_EVENTTYPE,
-	id: 'services.modify-string',
-	urls: (process.env.RAPIDS_URLS || '').split(','),
-});
+const rapids = createEventStream({
+	id: 'testing',
+	protocal: 'kafka',
+	urls: ['rapids:9092'],
+})
 
-subscribe({
-	broker,
-	handler: async({ data, isEnriched }) => {
+rapids.listen({
+	handler: async ({ cloudevent }) => {
 		try {
-			if (isEnriched) { return; }
+			if (cloudevent.enrichment) { return }
 
-			const string = data;
-			const numbers = string.match(/[0-9 , \.]+/g) || [];
-			return numbers.join('');
-		} catch(err) {
-			console.error(err);
-			publish({
-				broker,
-				cloudevent: { ...cloudevent, dlx: 'dead-letter' },
-			});
+			console.log('testing')
+			const enrichedCloudevent = createCloudevent({
+				...cloudevent,
+				enrichment: JSON.stringify('aaaaa'),
+			})
+			await rapids.emit({ cloudevent: enrichedCloudevent })
+		} catch (err) {
+			console.err(err)
 		}
 	},
-	types: ['ddnlanm4-modify-string.2020-07-07']
-});
+	types: ['ddnlanm4-modify-string.2020-07-07'],
+})
