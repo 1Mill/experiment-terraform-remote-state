@@ -3,9 +3,12 @@ const {
 } = require('@1mill/cloudevents')
 
 const rapids = createEventStream({
-	id: 'testing',
-	protocal: 'kafka',
-	urls: ['rapids:9092'],
+	id: 'services.modify-string',
+	mechanism: process.env.RAPIDS_MECHANISM,
+	password: process.env.RAPIDS_PASSWORD,
+	protocal: process.env.RAPIDS_PROTOCAL,
+	urls: (process.env.RAPIDS_URLS || '').split(','),
+	username: process.env.RAPIDS_USERNAME,
 })
 
 rapids.listen({
