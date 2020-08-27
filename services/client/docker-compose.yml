@@ -3,6 +3,8 @@ version: '3.8'
 services:
   ui:
     build: ./ui
+    depends_on:
+      - sockets
     environment:
       NODE_ENV: development
       PORT: 8080
