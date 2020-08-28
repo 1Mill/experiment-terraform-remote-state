@@ -12,11 +12,14 @@ const rapids = createEventStream({
 })
 
 rapids.listen({
-	handler: async ({ cloudevent, isEnriched }) => {
+	handler: async ({ cloudevent, data, isEnriched }) => {
 		try {
 			if (isEnriched) { return }
 
-			const enrichment = 'testing'
+			const string = data || ''
+			const numbers = string.match(/[0-9 , \.]+/g) || []
+			const enrichment = numbers.join('')
+
 			await rapids.emit({
 				cloudevent: enrich({ cloudevent, enrichment })
 			})
