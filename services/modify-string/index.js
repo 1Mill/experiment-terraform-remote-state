@@ -1,5 +1,5 @@
 const {
-	v2: { createCloudevent, createEventStream },
+	v2: { createEventStream, enrich }
 } = require('@1mill/cloudevents')
 
 const rapids = createEventStream({
@@ -12,16 +12,14 @@ const rapids = createEventStream({
 })
 
 rapids.listen({
-	handler: async ({ cloudevent }) => {
+	handler: async ({ cloudevent, isEnriched }) => {
 		try {
-			if (cloudevent.enrichment) { return }
+			if (isEnriched) { return }
 
-			console.log('testing')
-			const enrichedCloudevent = createCloudevent({
-				...cloudevent,
-				enrichment: JSON.stringify('aaaaa'),
+			const enrichment = 'testing'
+			await rapids.emit({
+				cloudevent: enrich({ cloudevent, enrichment })
 			})
-			await rapids.emit({ cloudevent: enrichedCloudevent })
 		} catch (err) {
 			console.err(err)
 		}
