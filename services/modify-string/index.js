@@ -34,7 +34,7 @@ river.listen({
 				cloudevent: enrichCloudevent({ cloudevent, enrichmentdata })
 			})
 		} catch (err) {
-			console.err(err)
+			console.error(err)
 		}
 	},
 	types: ['ddnlanm4-modify-string.2020-07-07'],
