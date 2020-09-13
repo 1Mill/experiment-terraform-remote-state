@@ -1,5 +1,5 @@
 const ioMiddlewareWildcard = require('socketio-wildcard')();
-const { v3: { createEventStream } } = require('@1mill/cloudevents');
+const { v3: { createCloudevent, createEventStream } } = require('@1mill/cloudevents');
 
 const server = require('http').createServer();
 const io = require('socket.io')(server);
@@ -29,25 +29,22 @@ rapids.listen({
 io.on('connect', socket => {
 	socket.on('*', packet => {
 		try {
-			const [{ type, payloads = [{}] }] = packet.data;
+			const [{ type, payloads = [{}] }] = packet.data
 			payloads.forEach(payload => {
-				const cloudevent = create({
+				const cloudevent = createCloudevent({
 					data: payload,
 					id: socket.id,
 					source: packet.nsp,
 					type,
-				});
-				publish({
-					broker,
-					cloudevent,
-				});
-			});
+				})
+				rapids.emit({ cloudevent })
+			})
 		} catch (err) {
 			console.error(err);
 		}
-	});
-});
+	})
+})
 
 server.listen(process.env.PORT, () => {
-	console.log(`Listening on ${process.env.HOST}:${process.env.PORT}`);
-});
+	console.log(`Listening on ${process.env.HOST}:${process.env.PORT}`)
+})
