@@ -9,7 +9,7 @@ const rapids = createEventStream({
 	id: 'services.client.sockets',
 	// mechanism: 'scram-sha-256',
 	// password: process.env.RAPIDS_PASSWORD,
-	protocal: 'kafka',
+	protocol: 'kafka',
 	urls: (process.env.RAPIDS_URLS || '').split(','),
 	// username: process.env.RAPIDS_USERNAME,
 })
