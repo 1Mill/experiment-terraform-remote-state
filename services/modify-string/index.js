@@ -5,7 +5,7 @@ const rapids = createEventStream({
 	id: ID,
 	mechanism: process.env.RAPIDS_MECHANISM,
 	password: process.env.RAPIDS_PASSWORD,
-	protocal: process.env.RAPIDS_PROTOCAL,
+	protocol: process.env.RAPIDS_PROTOCOL,
 	urls: (process.env.RAPIDS_URLS || '').split(','),
 	username: process.env.RAPIDS_USERNAME,
 })
@@ -13,7 +13,7 @@ const river = createEventStream({
 	id: ID,
 	mechanism: process.env.RAPIDS_MECHANISM,
 	password: process.env.RAPIDS_PASSWORD,
-	protocal: process.env.RAPIDS_PROTOCAL,
+	protocol: process.env.RAPIDS_PROTOCOL,
 	urls: (process.env.RAPIDS_URLS || '').split(','),
 	username: process.env.RAPIDS_USERNAME,
 })

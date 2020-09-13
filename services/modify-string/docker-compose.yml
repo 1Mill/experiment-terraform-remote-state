@@ -5,7 +5,7 @@ services:
     build: .
     environment:
       NODE_ENV: development
-      RAPIDS_PROTOCAL: kafka
+      RAPIDS_PROTOCOL: kafka
       RAPIDS_URLS: rapids:9092
     networks:
       - services-network
