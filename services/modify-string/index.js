@@ -1,6 +1,4 @@
-const {
-	v2: { createEventStream, enrich }
-} = require('@1mill/cloudevents')
+const { v3: { createEventStream, enrichCloudevent } } = require('@1mill/cloudevents')
 
 const ID = 'services.modify-string'
 const rapids = createEventStream({
@@ -29,11 +27,11 @@ river.listen({
 			// Perform buisness logic
 			const string = data || ''
 			const numbers = string.match(/[0-9 , \.]+/g) || []
-			const enrichment = numbers.join('')
+			const enrichmentdata = numbers.join('')
 
 			// Emit enriched cloudevent back to rapids
 			await rapids.emit({
-				cloudevent: enrich({ cloudevent, enrichment })
+				cloudevent: enrichCloudevent({ cloudevent, enrichmentdata })
 			})
 		} catch (err) {
 			console.err(err)
