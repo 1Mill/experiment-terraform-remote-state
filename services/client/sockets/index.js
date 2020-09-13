@@ -1,9 +1,9 @@
-const ioMiddlewareWildcard = require('socketio-wildcard')();
-const { v3: { createCloudevent, createEventStream } } = require('@1mill/cloudevents');
+const ioMiddlewareWildcard = require('socketio-wildcard')()
+const { v3: { createCloudevent, createEventStream } } = require('@1mill/cloudevents')
 
-const server = require('http').createServer();
-const io = require('socket.io')(server);
-io.use(ioMiddlewareWildcard);
+const server = require('http').createServer()
+const io = require('socket.io')(server)
+io.use(ioMiddlewareWildcard)
 
 const rapids = createEventStream({
 	id: 'services.client.sockets',
@@ -40,7 +40,7 @@ io.on('connect', socket => {
 				rapids.emit({ cloudevent })
 			})
 		} catch (err) {
-			console.error(err);
+			console.error(err)
 		}
 	})
 })
